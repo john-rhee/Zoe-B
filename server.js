@@ -1,13 +1,25 @@
-const express = require('express'); // import the express package
+const express = require('express');
+const helmet = require('helmet')
+const db = require('./data/db-config.js')
+const cors = require('cors');
+require('dotenv').config()
 
-const server = express(); // creates the server
 
-// handle requests to the root of the api, the / route
-server.get('/', (req, res) => {
-  res.send('Hello from Express');
-});
+const UserRouter = require('./zoe/user-router.js');
+const PictureRouter = require('./zoe/picture-router.js');
 
-// watch for connections on port 5000
-server.listen(5000, () =>
-  console.log('Server running on http://localhost:5000')
-);
+const server = express();
+
+server.use(helmet());
+server.use(express.json());
+server.use(cors());
+
+server.get("/", (req, res) => {
+    res.send({ api: "api is running..."})
+})
+
+
+server.use('/users', UserRouter);
+server.use('/exercise', PictureRouter);
+
+module.exports = server;
