@@ -2,7 +2,7 @@
   "name": "Zoe-Redux-Backend",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "server": "nodemon index.js",
     "start": "node index.js",
