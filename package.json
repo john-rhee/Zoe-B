@@ -20,9 +20,6 @@
   },
   "homepage": "https://github.com/john-rhee/Zoe-Redux-Backend#readme",
   "dependencies": {
-    "node-pre-gyp": "^0.14.0"
-  },
-  "devDependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "cross-env": "^7.0.0",
@@ -31,9 +28,12 @@
     "helmet": "^3.21.2",
     "jest": "^25.1.0",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.20.8",
-    "nodemon": "^2.0.2",
+    "knex": "^0.20.9",
+    "node-pre-gyp": "^0.14.0",
     "sqlite3": "^4.1.1",
     "supertest": "^4.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }
