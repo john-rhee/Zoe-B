@@ -1,12 +1,12 @@
 const express = require('express');
 const helmet = require('helmet')
-const db = require('./data/db-config.js')
+const db = require('../data/db-config.js')
 const cors = require('cors');
 require('dotenv').config()
 
 
-const UserRouter = require('./zoe/user-router.js');
-const PictureRouter = require('./zoe/picture-router.js');
+const UserRouter = require('../zoe/user-router.js');
+// const PictureRouter = require('../zoe/picture-router.js');
 
 const server = express();
 
@@ -20,6 +20,6 @@ server.get("/", (req, res) => {
 
 
 server.use('/users', UserRouter);
-server.use('/exercise', PictureRouter);
+// server.use('/picture', PictureRouter);
 
 module.exports = server;
