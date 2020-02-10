@@ -18,7 +18,9 @@
     "url": "https://github.com/john-rhee/Zoe-Redux-Backend/issues"
   },
   "homepage": "https://github.com/john-rhee/Zoe-Redux-Backend#readme",
-  "dependencies": {},
+  "dependencies": {
+    "node-pre-gyp": "^0.14.0"
+  },
   "devDependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
