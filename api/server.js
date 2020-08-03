@@ -6,7 +6,7 @@ require('dotenv').config()
 
 
 const UserRouter = require('../weightlift/user-router.js');
-const ExerciseRouter = require('../weightlift/exercise-router.js');
+const TodoRouter = require('../weightlift/todo-router.js');
 
 const server = express();
 
@@ -19,6 +19,6 @@ server.get("/", (req, res) => {
 })
 
 server.use('/users', UserRouter);
-server.use('/exercise', ExerciseRouter);
+server.use('/exercise', TodoRouter);
 
 module.exports = server;
