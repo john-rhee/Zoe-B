@@ -5,8 +5,8 @@ const cors = require('cors');
 require('dotenv').config()
 
 
-const UserRouter = require('../weightlift/user-router.js');
-const TodoRouter = require('../weightlift/todo-router.js');
+const UserRouter = require('../zoe/user-router.js');
+const TodoRouter = require('../zoe/todo-router.js');
 
 const server = express();
 
