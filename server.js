@@ -5,7 +5,7 @@ const cors = require('cors');
 require('dotenv').config()
 
 const UserRouter = require('./zoe/user-router.js');
-const PictureRouter = require('./zoe/picture-router.js');
+const TodoRouter = require('./zoe/todo-router.js');
 
 const server = express();
 
@@ -19,6 +19,6 @@ server.get("/", (req, res) => {
 
 
 server.use('/users', UserRouter);
-server.use('/picture', PictureRouter);
+server.use('/todo', TodoRouter);
 
 module.exports = server;
