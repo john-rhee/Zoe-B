@@ -1,16 +1,16 @@
 const express = require('express');
-const Exercise = require('./exercise-model.js');
+const Todo = require('./todo-model.js');
 const router = express.Router();
 const restricted = require("../restricted-middleware.js");
 
 router.get('/', restricted, (req, res) => {
-    Exercise.findExercise()
-  .then(Exercise => {
-      const mExercise= Exercise.map((exer)=>exer.completed===0?{...exer,completed:false}:{...exer,completed:true})
-    res.json(mExercise);
+    Todo.findTodo()
+  .then(Todo => {
+      const mTodo= Todo.map((exer)=>exer.completed===0?{...exer,completed:false}:{...exer,completed:true})
+    res.json(mTodo);
   })
   .catch(err => {
-    res.status(500).json({ message: 'Failed to get the exercises' });
+    res.status(500).json({ message: 'Failed to get the Todos' });
   });
 }); 
 
@@ -18,24 +18,24 @@ router.get('/:id', restricted, (req, res) => {
 
     const id = req.params.id;
 
-    Exercise.findById(id)
-  .then(Exercise => {
-    res.json(Exercise);
+    Todo.findById(id)
+  .then(Todo => {
+    res.json(Todo);
   })
   .catch(err => {
-    res.status(500).json({ message: 'Failed to get the exercise' });
+    res.status(500).json({ message: 'Failed to get the todo' });
   });
 }); 
 
 router.post('/', restricted, (req, res) => {
   const eData = req.body;
 
-  Exercise.addExercise(eData)
-  .then(exercise => {
-    res.status(201).json(exercise);
+  Todo.addTodo(eData)
+  .then(todo => {
+    res.status(201).json(todo);
   })
   .catch (err => {
-    res.status(500).json({ message: 'Failed to create new exercise' });
+    res.status(500).json({ message: 'Failed to create new todo' });
   });
 });  
 
@@ -43,35 +43,35 @@ router.put('/:id', restricted, (req, res) => {
     const { id } = req.params;
     const changes = req.body;
   
-    Exercise.findById(id)
-    .then(exercise => {
-      if (exercise) {
-        Exercise.updateExercise(changes, id)
-        .then(updatedExercise => {
-          res.json(updatedExercise);
+    Todo.findById(id)
+    .then(todo => {
+      if (todo) {
+        Todo.updateTodo(changes, id)
+        .then(updatedTodo => {
+          res.json(updatedTodo);
         });
       } else {
-        res.status(404).json({ message: 'Could not find the exercise with given id' });
+        res.status(404).json({ message: 'Could not find the todo with given id' });
       }
     })
     .catch (err => {
-      res.status(500).json({ message: 'Failed to update the exercise' });
+      res.status(500).json({ message: 'Failed to update the todo' });
     });
   });
   
 router.delete('/:id', restricted, (req, res) => {
     const { id } = req.params;
 
-    Exercise.removeExercise(id)
+    Todo.removeTodo(id)
     .then(deleted => {
         if (deleted) {
         res.json({ removed: deleted });
         } else {
-        res.status(404).json({ message: 'Could not find exercise with given id' });
+        res.status(404).json({ message: 'Could not find todo with given id' });
         }
     })
     .catch(err => {
-        res.status(500).json({ message: 'Failed to delete exercise' });
+        res.status(500).json({ message: 'Failed to delete todo' });
     });
 });
 
