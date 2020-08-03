@@ -6,8 +6,7 @@ const restricted = require("../restricted-middleware.js");
 router.get('/', restricted, (req, res) => {
     Todo.findTodo()
   .then(Todo => {
-      const mTodo= Todo.map((exer)=>exer.completed===0?{...exer,completed:false}:{...exer,completed:true})
-    res.json(mTodo);
+    res.json(Todo);
   })
   .catch(err => {
     res.status(500).json({ message: 'Failed to get the Todos' });
