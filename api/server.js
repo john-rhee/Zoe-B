@@ -19,6 +19,6 @@ server.get("/", (req, res) => {
 })
 
 server.use('/users', UserRouter);
-server.use('/exercise', TodoRouter);
+server.use('/todo', TodoRouter);
 
 module.exports = server;
