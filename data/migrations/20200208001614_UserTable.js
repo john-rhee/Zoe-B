@@ -2,18 +2,12 @@ exports.up = function(knex) {
     return knex.schema.createTable("users", function(table) {
         table.increments();
 
-        table.string("full_name", 128)
-             .notNullable();  
-
         table.string("username", 128)
-             .notNullable()
-             .unique();
+            .notNullable()
+            .unique();
 
-        table.string("password", 128).notNullable();     
-        
-        table.timestamps(true, true);
-        // table.datetime("created_at");
-        // table.datetime("updated_at");
+        table.string("password", 128)
+            .notNullable();     
              
     });
 };
