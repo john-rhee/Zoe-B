@@ -4,6 +4,12 @@ const db = require('../data/db-config.js')
 const cors = require('cors');
 require('dotenv').config()
 
+//picture
+const multer = require("multer");
+const path = require("path");
+const upload = multer({
+    dest:"./uImages"
+})
 
 const UserRouter = require('../zoe/user-router.js');
 const TodoRouter = require('../zoe/todo-router.js');
@@ -17,6 +23,11 @@ server.use(cors());
 server.get("/", (req, res) => {
     res.send({ api: "api is running..."})
 })
+
+server.post("/upload", upload.single("profile"), (req,res)=> {
+    console.log(req.file)
+})
+
 
 server.use('/users', UserRouter);
 server.use('/todo', TodoRouter);
