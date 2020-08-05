@@ -32,7 +32,8 @@ server.post("/upload", function(req, res, next){
             throw err;
         res.send({
             seccess: true,
-            message: "File uploaded!"
+            message: "File uploaded!",
+            picture: file
         });
     });
 })
