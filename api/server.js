@@ -4,13 +4,6 @@ const db = require('../data/db-config.js')
 const cors = require('cors');
 require('dotenv').config()
 
-//picture
-const multer = require("multer");
-const path = require("path");
-const upload = multer({
-    dest:"./uImages"
-})
-
 const UserRouter = require('../zoe/user-router.js');
 const TodoRouter = require('../zoe/todo-router.js');
 
@@ -24,12 +17,25 @@ server.get("/", (req, res) => {
     res.send({ api: "api is running..."})
 })
 
-server.post("/upload", upload.single("profile"), (req,res)=> {
-    console.log(req.file)
-})
-
-
 server.use('/users', UserRouter);
 server.use('/todo', TodoRouter);
+
+
+//
+var fileupload = require("express-fileupload");
+server.use(fileupload());
+//
+server.post("/upload", function(req, res, next){
+    const file = req.files.uImage;
+    file.mv('./uploads/'+file.name, function(err,result){
+        if(err)
+            throw err;
+        res.send({
+            seccess: true,
+            message: "File uploaded!"
+        });
+    });
+})
+//
 
 module.exports = server;
