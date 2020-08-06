@@ -27,7 +27,7 @@ server.use(fileupload());
 //
 server.post("/upload", function(req, res, next){
     const file = req.files.uImage;
-    file.mv('./uploads/'+file.name+"-"+Date.now(), function(err,result){
+    file.mv('./uploads/'+file.name, function(err,result){
         if(err)
             throw err;
         res.send({
