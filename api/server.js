@@ -11,7 +11,7 @@ const server = express();
 
 server.use(helmet());
 server.use(express.json());
-server.use(cors());
+// server.use(cors());
 
 server.get("/", (req, res) => {
     res.send({ api: "api is running..."})
@@ -27,7 +27,7 @@ server.use(fileupload());
 //
 server.post("/upload", function(req, res, next){
     const file = req.files.uImage;
-    file.mv('./uploads/'+file.name, function(err,result){
+    file.mv('./uploads/'+file.name+"-"+Date.now(), function(err,result){
         if(err)
             throw err;
         res.send({
