@@ -39,7 +39,7 @@ server.use('/todo', TodoRouter);
 
 
 //
-server.use('/profile', express.static('/uploads'))
+server.use('/profile', express.static('uploads'))
 
 //
 // var fileupload = require("express-fileupload");
@@ -47,7 +47,7 @@ server.use('/profile', express.static('/uploads'))
 // server.use(fileupload());
 
 //
-server.post("/upload", upload.single("uImage"), function(req, res){
+server.post("/upload", upload.single("uimage"), function(req, res){
     console.log(req.file);
     res.json({
                     url: `https://zoe-backend.herokuapp.com/profile/${req.file.filename}`,
