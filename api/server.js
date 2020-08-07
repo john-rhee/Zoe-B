@@ -15,10 +15,31 @@ const storage = multer.diskStorage({
     }
 })
 
-//
 const upload = multer({
-    storage: storage
+    storage: storage,
+    limits: {fileSize:5000000},
+    fileFilter: function(req,file,cb){
+        checkFileType(file,cb);
+    }
 })
+
+//Check file type
+function checkFileType(file, cb){
+    //allowed file types
+    const filetypes = /jpeg|jpg|png|gif/;
+    //check ext
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    //check mime type
+    const mimetype = filetypes.test(file.mimetype);
+
+    if(mimetype && extname){
+        return cb(null,true);
+    } else {
+        cb("Error: Images Only!")
+    }
+
+}
+
 
 const UserRouter = require('../zoe/user-router.js');
 const TodoRouter = require('../zoe/todo-router.js');
@@ -36,7 +57,6 @@ server.get("/", (req, res) => {
 server.use('/users', UserRouter);
 server.use('/todo', TodoRouter);
 
-
 //setting path to uploaded picture files
 server.use('/profile', express.static('uploads'))
 
@@ -48,5 +68,6 @@ server.post("/upload", upload.single("uimage"), function(req, res){
                     picture: req.file
                 });
 })
+
 
 module.exports = server;
