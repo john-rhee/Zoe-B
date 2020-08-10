@@ -13,6 +13,8 @@ const PictureRouter = require('../zoe/picture-router.js');
 
 const server = express();
 
+server.use('/profile', express.static('uploads'))
+
 server.use(helmet());
 server.use(express.json());
 server.use(cors());
