@@ -4,26 +4,25 @@ module.exports = {
     
     findPicture,
     addPicture,
-    // findById,
+    findById,
 
 };
 
-// function findById(id) {
-//     return db("picture")
-//         .where({ id })
-//         .first();
-// }
-
-function addPicture(picture) {
+function findById(id) {
     return db("picture")
-        .insert(picture
-            // ,"id"
-            )
-        // .then(ids => {
-        //     const [id] = ids;
+      .select("id", "name")
+      .where({ id })
+      .first();
+  }
 
-        //     return findById(id);
-        // });
+function addPicture(picName) {
+    
+    return db("picture")
+        .insert({name: picName},"id")
+        .then(ids => {
+            const [id] = ids;
+            return findById(id);
+        });
 }
 
 function findPicture() {
