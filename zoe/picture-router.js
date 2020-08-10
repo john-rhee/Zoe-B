@@ -52,7 +52,7 @@ router.post('/',
 // restricted, 
 upload.single("uimage"), (req, res) => {
     console.log(req.file);
-    const imageName = req.file.filename;
+    const imageName = `https://zoe-backend.herokuapp.com/profile/${req.file.filename}`;
     console.log(imageName);
   
     Picture.addPicture(imageName)
