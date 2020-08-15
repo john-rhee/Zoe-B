@@ -17,9 +17,9 @@ const storage = multer.diskStorage({
 const upload = multer({
     storage: storage,
     limits: {fileSize:5000000},
-    fileFilter: function(req,file,cb){
-        checkFileType(file,cb);
-    }
+    // fileFilter: function(req,file,cb){
+    //     checkFileType(file,cb);
+    // }
 })
 
 //Check file type
@@ -51,11 +51,20 @@ function checkFileType(file, cb){
 router.post('/', 
 // restricted, 
 upload.single("uimage"), (req, res) => {
-    console.log(req.file);
-    const imageName = `https://zoe-backend.herokuapp.com/profile/${req.file.filename}`;
-    console.log(imageName);
-  
-    Picture.addPicture(imageName)
+    upFiles= JSON.parse(decodeURI(req.file.originalname))
+    console.log("this is file uploaded", upFiles);
+    console.log("this is file uploaded", req.file);
+
+    const imageName = `http://localhost:5000/profile/${req.file.filename}`;
+    console.log("url",imageName);
+
+    const imageTitle = upFiles.title
+    const imageDescript = upFiles.description
+    const userId = upFiles.user_id
+
+    console.log(imageName, imageTitle, imageDescript, userId);
+    
+    Picture.addPicture(imageName, imageTitle, imageDescript, userId)
     // .then(pic => {
     //   res.status(201).json(pic);
     //   res.json({
@@ -67,7 +76,7 @@ upload.single("uimage"), (req, res) => {
     //   res.status(500).json({ message: 'Failed to add picture' });
     // });
 
-    Picture.findPicture()
+    Picture.findPicture(userId)
         .then(pic => {
             res.json(pic);
          })
@@ -75,5 +84,21 @@ upload.single("uimage"), (req, res) => {
             res.status(500).json({ message: 'Failed to get the Pictures' });
         });
   });  
+
+  router.get('/', 
+//   restricted, 
+  (req, res) => {
+    console.log(req.query.user_id)
+
+    //getting users id from req
+    userId=req.query.user_id
+    Picture.findPicture(userId)
+  .then(pic => {
+    res.json(pic);
+  })
+  .catch(err => {
+    res.status(500).json({ message: 'Failed to get the images' });
+  });
+}); 
 
 module.exports = router;

@@ -1,11 +1,11 @@
 const express = require('express');
 const helmet = require('helmet')
-const db = require('../data/db-config.js')
+// const db = require('../data/db-config.js')
 const cors = require('cors');
 require('dotenv').config()
 
-const multer = require('multer');
-const path = require('path');
+// const multer = require('multer');
+// const path = require('path');
 
 const UserRouter = require('../zoe/user-router.js');
 const TodoRouter = require('../zoe/todo-router.js');
