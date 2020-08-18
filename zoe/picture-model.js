@@ -31,10 +31,10 @@ function findPicture(userId) {
         .where({user_id:userId})
 }
 
-function updatePicture(changes, id) {
+function updatePicture(picName, picTitle, picDescript, userId, id) {
     return db("picture")
         .where({ id })
-        .update(changes)
+        .update({name: picName, title: picTitle, descript:picDescript, user_id:userId})
 }
 
 function removePicture(id) {

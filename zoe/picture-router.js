@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const restricted = require("../restricted-middleware.js");
 const Picture = require('./picture-model.js');
+const fs = require('fs');
+
 
 const multer = require('multer');
 const path = require('path');
@@ -55,7 +57,8 @@ upload.single("uimage"), (req, res) => {
     console.log("this is file uploaded", upFiles);
     console.log("this is file uploaded", req.file);
 
-    const imageName = `http://localhost:5000/profile/${req.file.filename}`;
+    // const imageName = `http://localhost:5000/profile/${req.file.filename}`;
+    const imageName = req.file.filename
     console.log("url",imageName);
 
     const imageTitle = upFiles.title
@@ -92,6 +95,7 @@ upload.single("uimage"), (req, res) => {
 
     //getting users id from req
     userId=req.query.user_id
+
     Picture.findPicture(userId)
   .then(pic => {
     res.json(pic);
@@ -100,5 +104,64 @@ upload.single("uimage"), (req, res) => {
     res.status(500).json({ message: 'Failed to get the images' });
   });
 }); 
+
+router.delete('/:id', 
+// restricted, 
+(req, res) => {
+    const { id } = req.params;
+
+    //getting file name from req
+    const file_name=req.query.file_name
+
+    Picture.removePicture(id)
+    .then(deleted => {
+        if (deleted) {
+        res.json({ removed: deleted });
+        } else {
+        res.status(404).json({ message: 'Could not find image with given id' });
+        }
+    })
+    .catch(err => {
+        res.status(500).json({ message: 'Failed to delete image' });
+    });
+
+    console.log("deleting", file_name)
+    //deleting image from folder
+    fs.unlink(`/Users/John/Desktop/Git/Zoe-Redux-Backend/uploads/${file_name}`, (err) => {
+        if (err) throw err;
+      });
+});
+
+router.put('/:id', 
+// restricted, 
+upload.single("uimage"),
+(req, res) => {
+
+    const imageName = req.file.filename
+
+    upFiles= JSON.parse(decodeURI(req.file.originalname))
+
+    const imageTitle = upFiles.title
+    const imageDescript = upFiles.description
+    const userId = upFiles.user_id
+
+//break//
+    const { id } = req.params;
+  
+    Picture.findById(id)
+    .then(pic => {
+      if (pic) {
+        Picture.updatePicture(imageName, imageTitle, imageDescript, userId, id)
+        .then(updatedPic => {
+          res.json(updatedPic);
+        });
+      } else {
+        res.status(404).json({ message: 'Could not find the image with given id' });
+      }
+    })
+    .catch (err => {
+      res.status(500).json({ message: 'Failed to update the image' });
+    });
+  });
 
 module.exports = router;
