@@ -6,7 +6,8 @@ module.exports = {
     addPicture,
     findById,
     updatePicture,
-    removePicture
+    removePicture,
+    findByImageId
 
 };
 
@@ -15,6 +16,12 @@ function findById(id) {
       .where({ id })
       .first();
   }
+
+function findByImageId(id,userId) {
+return db("picture")
+    .where({id, user_id:userId})
+    .first();
+}
 
 function addPicture(picName, picTitle, picDescript, userId) {
     

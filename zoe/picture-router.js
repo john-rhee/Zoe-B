@@ -144,14 +144,17 @@ upload.single("uimage"),
     const imageTitle = upFiles.title
     const imageDescript = upFiles.description
     const userId = upFiles.user_id
+    const imageId = upFiles.image_id
+
+    console.log("uploaded files for image update", upFiles);
+    console.log(imageName, imageTitle, imageDescript, userId, "image id:", imageId);
 
 //break//
-    const { id } = req.params;
   
-    Picture.findById(id)
+    Picture.findByImageId(imageId, userId)
     .then(pic => {
       if (pic) {
-        Picture.updatePicture(imageName, imageTitle, imageDescript, userId, id)
+        Picture.updatePicture(imageName, imageTitle, imageDescript, userId, imageId)
         .then(updatedPic => {
           res.json(updatedPic);
         });
