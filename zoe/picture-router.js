@@ -137,6 +137,8 @@ router.put('/:id',
 upload.single("uimage"),
 (req, res) => {
 
+    
+
     const imageName = req.file.filename
 
     upFiles= JSON.parse(decodeURI(req.file.originalname))
@@ -145,11 +147,17 @@ upload.single("uimage"),
     const imageDescript = upFiles.description
     const userId = upFiles.user_id
     const imageId = upFiles.image_id
+    const previousFile = upFiles.prev_file
 
     console.log("uploaded files for image update", upFiles);
-    console.log(imageName, imageTitle, imageDescript, userId, "image id:", imageId);
+    console.log(imageName, imageTitle, imageDescript, userId, "image id:", imageId, previousFile);
 
 //break//
+
+    //deleting previous image from folder
+    fs.unlink(`/Users/John/Desktop/Git/Zoe-Redux-Backend/uploads/${previousFile}`, (err) => {
+      if (err) throw err;
+    }); 
   
     Picture.findByImageId(imageId, userId)
     .then(pic => {
