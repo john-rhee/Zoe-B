@@ -8,7 +8,6 @@ require('dotenv').config()
 // const path = require('path');
 
 const UserRouter = require('../zoe/user-router.js');
-const TodoRouter = require('../zoe/todo-router.js');
 const PictureRouter = require('../zoe/picture-router.js');
 
 const server = express();
@@ -24,7 +23,6 @@ server.get("/", (req, res) => {
 })
 
 server.use('/users', UserRouter);
-server.use('/todo', TodoRouter);
 server.use('/upload', PictureRouter);
 
 module.exports = server;
