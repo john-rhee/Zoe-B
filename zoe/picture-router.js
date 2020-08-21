@@ -84,7 +84,7 @@ router.post('/', upload.single("uimage"), (req, res) => {
         });
   });  
 
-  router.get('/', restricted, (req, res) => {
+  router.get('/', (req, res) => {
     console.log(req.query.user_id)
 
     //getting users id from req
@@ -99,7 +99,7 @@ router.post('/', upload.single("uimage"), (req, res) => {
   });
 }); 
 
-router.delete('/:id', restricted, (req, res) => {
+router.delete('/:id', (req, res) => {
     const { id } = req.params;
 
     //getting file name from req
