@@ -19,7 +19,6 @@ server.use(express.json());
 server.use(cors());
 
 server.get("/", (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*');
     res.send({ api: "api is running..."})
 })
 

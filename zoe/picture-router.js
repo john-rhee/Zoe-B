@@ -49,6 +49,7 @@ function checkFileType(file, cb){
 // })
 
 router.post('/', restricted, upload.single("uimage"), (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     upFiles= JSON.parse(decodeURI(req.file.originalname))
     console.log("this is file uploaded", upFiles);
     console.log("this is file uploaded", req.file);
@@ -85,6 +86,7 @@ router.post('/', restricted, upload.single("uimage"), (req, res) => {
   });  
 
   router.get('/', restricted, (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
     console.log(req.query.user_id)
 
     //getting users id from req
