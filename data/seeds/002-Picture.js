@@ -6,8 +6,8 @@ exports.seed = function(knex) {
       // Inserts seed entries
       return knex('picture').insert([
         {name: 'zoe1.jpg', title: 'Busy Zoe', descript: 'Zoe is watching TV.', user_id: 1},
-        {name: 'zoe2.jpg', title: 'Zoe Studying', descript: 'Zoe is reading a book.', user_id: 1},
-        {name: 'zoe3.jpg', title: 'Halloween Zoe', descript: 'Zoe is wearing a Halloween custome.', user_id: 1}
+        {name: 'zoe1.jpg', title: 'Busy Zoe', descript: 'Zoe is watching TV.', user_id: 1},
+        {name: 'zoe1.jpg', title: 'Busy Zoe', descript: 'Zoe is watching TV.', user_id: 1},
        
       ]);
     });
