@@ -16,7 +16,7 @@ server.use('/profile', express.static('uploads'))
 
 server.use(helmet());
 server.use(express.json());
-server.use(cors());
+// server.use(cors());
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", '*');
