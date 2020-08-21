@@ -16,7 +16,13 @@ server.use('/profile', express.static('uploads'))
 
 server.use(helmet());
 server.use(express.json());
-server.use(cors());
+
+var corsOptions = {
+    origin: 'http://zoe-kappa.now.sh',
+    optionsSuccessStatus: 200
+  }
+
+server.use(cors(corsOptions));
 
 server.get("/", (req, res) => {
     res.send({ api: "api is running..."})
