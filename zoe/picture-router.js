@@ -48,9 +48,7 @@ function checkFileType(file, cb){
 //                 });
 // })
 
-router.post('/', 
-// restricted, 
-upload.single("uimage"), (req, res) => {
+router.post('/', restricted, upload.single("uimage"), (req, res) => {
     upFiles= JSON.parse(decodeURI(req.file.originalname))
     console.log("this is file uploaded", upFiles);
     console.log("this is file uploaded", req.file);
@@ -101,9 +99,7 @@ upload.single("uimage"), (req, res) => {
   });
 }); 
 
-router.delete('/:id', 
-// restricted, 
-(req, res) => {
+router.delete('/:id', restricted, (req, res) => {
     const { id } = req.params;
 
     //getting file name from req
@@ -129,9 +125,7 @@ router.delete('/:id',
       });
 });
 
-router.put('/:id', 
-// restricted, 
-upload.single("uimage"),
+router.put('/:id', restricted, upload.single("uimage"),
 (req, res) => {
 
     
