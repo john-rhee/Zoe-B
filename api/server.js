@@ -18,6 +18,11 @@ server.use(helmet());
 server.use(express.json());
 server.use(cors());
 
+server.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
+
 server.get("/", (req, res) => {
     res.send({ api: "api is running..."})
 })
