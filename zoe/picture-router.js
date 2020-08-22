@@ -104,6 +104,8 @@ upload.single("uimage"), (req, res) => {
   });
 }); 
 
+router.options('/:id', cors()) 
+
 router.delete('/:id', cors(),
 // restricted, 
 (req, res) => {
@@ -131,6 +133,8 @@ router.delete('/:id', cors(),
         if (err) throw err;
       });
 });
+
+router.options('/:id', cors()) 
 
 router.put('/:id', cors(),
 // restricted, 
