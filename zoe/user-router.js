@@ -3,8 +3,9 @@ const router = require("express").Router();
 const Users = require("./user-model.js");
 const restricted = require("../restricted-middleware.js");
 const jwt = require("jsonwebtoken");
+const cors = require('cors');
 
-router.post("/register", (req, res) => {
+router.post("/register", cors(), (req, res) => {
   let user = req.body;
   const hash = bcrypt.hashSync(user.password, 14);
   user.password = hash;
@@ -23,7 +24,7 @@ router.post("/register", (req, res) => {
 });
 
 //TOKEN LOGIN//
-router.post("/login", (req, res) => {
+router.post("/login", cors(),(req, res) => {
   let { username, password } = req.body;
 
   Users.findBy({ username })
@@ -65,7 +66,7 @@ function signToken(user) {
   return jwt.sign(payload, secret, options); // notice the return
 }
 
-router.get("/",restricted, (req, res) => {
+router.get("/",cors(),restricted, (req, res) => {
   Users.find()
   .then(users => {
     res.json(users);
@@ -76,7 +77,7 @@ router.get("/",restricted, (req, res) => {
 });
 
 // GET Users by ID
-router.get('/:id', restricted, (req, res) => {
+router.get('/:id', cors(), restricted, (req, res) => {
 
   const { id } = req.params;
 

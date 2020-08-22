@@ -3,6 +3,7 @@ const router = express.Router();
 const restricted = require("../restricted-middleware.js");
 const Picture = require('./picture-model.js');
 const fs = require('fs');
+const cors = require('cors');
 
 
 const multer = require('multer');
@@ -48,7 +49,7 @@ function checkFileType(file, cb){
 //                 });
 // })
 
-router.post('/', 
+router.post('/', cors(),
 // restricted, 
 upload.single("uimage"), (req, res) => {
     upFiles= JSON.parse(decodeURI(req.file.originalname))
@@ -86,7 +87,7 @@ upload.single("uimage"), (req, res) => {
         });
   });  
 
-  router.get('/', 
+  router.get('/', cors(),
 //   restricted, 
   (req, res) => {
     console.log(req.query.user_id)
@@ -103,7 +104,7 @@ upload.single("uimage"), (req, res) => {
   });
 }); 
 
-router.delete('/:id', 
+router.delete('/:id', cors(),
 // restricted, 
 (req, res) => {
     const { id } = req.params;
@@ -131,7 +132,7 @@ router.delete('/:id',
       });
 });
 
-router.put('/:id', 
+router.put('/:id', cors(),
 // restricted, 
 upload.single("uimage"),
 (req, res) => {
