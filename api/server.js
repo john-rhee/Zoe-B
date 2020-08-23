@@ -28,12 +28,12 @@ server.use(cors());
 //     });
 
 server.options('*', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.send('ok');
   });
   
 server.use((req, res) => {
-    res.set('Access-Control-Allow-Origin', '*');
+    res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
 });
 
 server.get("/", (req, res) => {
