@@ -113,15 +113,6 @@ router.delete('/:id',
     Picture.removePicture(id)
     .then(deleted => {
         if (deleted) {
-        res.header("Access-Control-Allow-Origin", "http://localhost:5000") 
-        res.header(
-            "Access-Control-Allow-Headers",
-            "*" 
-        );
-        if(req.method === 'OPTIONS'){
-            res.header('Access-Control-Allow-Methods', 'PUT, POST, DELETE, GET'); 
-            return res.status(200).json({});
-        } 
         res.json({ removed: deleted });
         } else {
         res.status(404).json({ message: 'Could not find image with given id' });
