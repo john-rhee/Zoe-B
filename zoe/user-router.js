@@ -4,6 +4,15 @@ const Users = require("./user-model.js");
 const restricted = require("../restricted-middleware.js");
 const jwt = require("jsonwebtoken");
 
+router.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", '*');
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+  next();
+  });
+
+
 router.post("/register", (req, res) => {
   let user = req.body;
   const hash = bcrypt.hashSync(user.password, 14);
