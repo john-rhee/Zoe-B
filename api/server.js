@@ -32,9 +32,8 @@ server.use(
   );
 
 server.options(
-    "*",
     cors({
-      origin: 'http://localhost:3000/lists'
+      origin: 'http://localhost:3000'
     })
   );
 
