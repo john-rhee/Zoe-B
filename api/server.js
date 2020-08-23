@@ -15,17 +15,15 @@ const server = express();
 server.use(helmet());
 server.use(express.json());
 
-server.use(cors());
-server.options('GET,PUT,POST,DELETE', cors());
+// server.use(cors());
+// server.options('*', cors());
 
-// server.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", 'http://localhost:3000');
-//     res.header("Access-Control-Allow-Headers", '*');
-//     // res.header("Access-Control-Allow-Credentials", true);
-//     // res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    
-//     next();
-//     });
+server.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", 'http://localhost:3000');
+    res.header("Access-Control-Allow-Headers", '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    next();
+    });
 
 server.get("/", (req, res) => {
     res.send({ api: "api is running..."})
