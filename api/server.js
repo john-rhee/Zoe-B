@@ -27,13 +27,11 @@ server.use(cors());
 //     next();
 //     });
 
-server.options('*', (req, res) => {
-    res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.send('ok');
-  });
-  
-server.use((req, res) => {
-    res.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+server.options('/*', (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    res.sendStatus(200);
 });
 
 server.get("/", (req, res) => {
