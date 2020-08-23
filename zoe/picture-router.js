@@ -7,14 +7,6 @@ const fs = require('fs');
 const multer = require('multer');
 const path = require('path');
 
-router.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", 'http://localhost:3000');
-  res.header("Access-Control-Allow-Credentials", true);
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
-  next();
-  });
-
 //storage for uploaded pictures
 const storage = multer.diskStorage({
     destination: './uploads',
