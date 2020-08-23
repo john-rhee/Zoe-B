@@ -16,16 +16,24 @@ server.use('/profile', express.static('uploads'))
 
 server.use(helmet());
 server.use(express.json());
-// server.use(cors());
+server.use(cors());
 
-server.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", 'http://localhost:3000');
-    res.header("Access-Control-Allow-Headers", '*');
-    // res.header("Access-Control-Allow-Credentials", true);
-    // res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+// server.use(function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", 'http://localhost:3000');
+//     res.header("Access-Control-Allow-Headers", '*');
+//     // res.header("Access-Control-Allow-Credentials", true);
+//     // res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     
-    next();
-    });
+//     next();
+//     });
+
+server.use(cors({
+    'allowedHeaders': ['sessionId', 'Content-Type'],
+    'exposedHeaders': ['sessionId'],
+    'origin': '*',
+    'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    'preflightContinue': false
+  }));
 
 server.get("/", (req, res) => {
     res.send({ api: "api is running..."})
