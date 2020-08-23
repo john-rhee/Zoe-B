@@ -31,9 +31,8 @@ server.use(
     })
   );
 
-server.options(
-    cors({
-      origin: 'http://localhost:3000'
+server.options('*', cors({
+    origin: 'http://localhost:3000'
     })
   );
 
