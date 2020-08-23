@@ -27,13 +27,14 @@ server.use(cors());
 //     next();
 //     });
 
-server.use(cors({
-    'allowedHeaders': ['sessionId', 'Content-Type'],
-    'exposedHeaders': ['sessionId'],
-    'origin': '*',
-    'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    'preflightContinue': false
-  }));
+server.options('*', (req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+    res.send('ok');
+  });
+  
+server.use((req, res) => {
+    res.set('Access-Control-Allow-Origin', '*');
+});
 
 server.get("/", (req, res) => {
     res.send({ api: "api is running..."})
