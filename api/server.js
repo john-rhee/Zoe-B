@@ -18,23 +18,18 @@ server.use(express.json());
 // server.use(cors());
 // server.options('*', cors());
 
-// server.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", 'http://localhost:3000');
-//     res.header("Access-Control-Allow-Headers", '*');
-//     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-//     next();
-//     });
-
-server.use(
-    cors({
-      origin: 'http://localhost:3000'
-    })
-  );
-
-server.options('*', cors({
-    origin: 'http://localhost:3000'
-    })
-  );
+server.use((req, res, next) => { 
+    res.header("Access-Control-Allow-Origin", "*") 
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization" 
+    );
+    if(req.method === 'OPTIONS'){
+        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET'); 
+        return res.status(200).json({});
+    }
+    next();
+})
 
 server.get("/", (req, res) => {
     res.send({ api: "api is running..."})
