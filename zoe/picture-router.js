@@ -111,6 +111,7 @@ router.delete('/:id',
 
     //getting file name from req
     const file_name=req.query.file_name
+    res.status(200).json({})
     
     Picture.removePicture(id)
     .then(deleted => {
