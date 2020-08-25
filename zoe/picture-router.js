@@ -78,6 +78,7 @@ upload.single("uimage"), (req, res) => {
 
     Picture.findPicture(userId)
         .then(pic => {
+            res.setHeader("Test", 'Test');
             res.json(pic);
          })
         .catch(err => {
