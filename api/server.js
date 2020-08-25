@@ -15,32 +15,13 @@ const server = express();
 server.use(helmet());
 server.use(express.json());
 
-// server.use(cors());
-// server.options('*', cors());
-
-// server.use(function (req, res, next) {
-    
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-//     res.setHeader('Access-Control-Allow-Headers', 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
-//     res.setHeader('Access-Control-Allow-Credentials', true);
-
-//     next();
-// });
-
-server.use((req, res, next) => {
-    res.Header("Access-Control-Allow-Origin", "*");
-    res.Header(
-      "Access-Control-Allow-Headers",
-      'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json'
-    );
-    res.Header(
-      "Access-Control-Allow-Methods",
-      'GET, POST, OPTIONS, PUT, PATCH, DELETE'
-    );
-    res.Header('Access-Control-Allow-Credentials', true);
-    next();
-  });
+server.use(cors());
+server.options('*', (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    res.sendStatus(200);
+});
 
 server.get("/", (req, res) => {
     res.send({ api: "api is running..."})
