@@ -114,22 +114,25 @@ router.delete('/:id',
 
     .then(del => {
       res.json(del);
+
+      Picture.removePicture(id)
+        .then(deleted => {
+            if (deleted) {
+            res.json({ removed: deleted });
+            } else {
+            res.status(404).json({ message: 'Could not find image with given id' });
+            }
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to delete image' });
+        });
+
     })
     .catch(err => {
       res.status(500).json({ message: 'Failed to delete the images' });
     });
     
-    Picture.removePicture(id)
-    .then(deleted => {
-        if (deleted) {
-        res.json({ removed: deleted });
-        } else {
-        res.status(404).json({ message: 'Could not find image with given id' });
-        }
-    })
-    .catch(err => {
-        res.status(500).json({ message: 'Failed to delete image' });
-    });
+    
 
     console.log("deleting", file_name)
     //deleting image from folder
