@@ -127,9 +127,9 @@ router.delete('/:id',
     console.log("deleting", file_name)
     //deleting image from folder
     // fs.unlink(`/Users/John/Desktop/Git/Zoe-Redux-Backend/uploads/${file_name}`, (err) => {
-    // fs.unlink(`../Zoe-Redux-Backend/uploads/${file_name}`, (err) => {
-    //     if (err) throw err;
-    //   });
+    fs.unlink(`../Zoe-Redux-Backend/uploads/${file_name}`, (err) => {
+        if (err) throw err;
+      });
 });
 
 router.put('/:id', 
