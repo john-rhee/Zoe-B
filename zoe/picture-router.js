@@ -109,21 +109,30 @@ router.delete('/:id',
 (req, res) => {
     const { id } = req.params;
 
+    // response.writeHead(404, {"Content-Type": "application/json"});
+    // response.write(JSON.stringify(updatedPic));
+    // response.end();
+
+
     //getting file name from req
     const file_name=req.query.file_name
-    
+    console.log("before")
     res.status(200).json({})
+    console.log("after")
     
     Picture.removePicture(id)
     .then(deleted => {
         if (deleted) {
-        res.json({ removed: deleted });
+        // res.json({ removed: deleted });
+        console.log("removed: deleted")
         } else {
-        res.status(404).json({ message: 'Could not find image with given id' });
+        // res.status(404).json({ message: 'Could not find image with given id' });
+        console.log("Could not find image with given id")
         }
     })
     .catch(err => {
-        res.status(500).json({ message: 'Failed to delete image' });
+        // res.status(500).json({ message: 'Failed to delete image' });
+        console.log("Failed to delete image")
     });
 
     console.log("deleting", file_name)
@@ -168,14 +177,17 @@ upload.single("uimage"),
       if (pic) {
         Picture.updatePicture(imageName, imageTitle, imageDescript, userId, imageId)
         .then(updatedPic => {
-          res.json(updatedPic);
+          // res.json(updatedPic);
+          console.log("success")
         });
       } else {
-        res.status(404).json({ message: 'Could not find the image with given id' });
+        // res.status(404).json({ message: 'Could not find the image with given id' });
+        console.log("Could not find the image with given id")
       }
     })
     .catch (err => {
-      res.status(500).json({ message: 'Failed to update the image' });
+      // res.status(500).json({ message: 'Failed to update the image' });
+      console.log("Failed to update the image")
     });
   });
 
