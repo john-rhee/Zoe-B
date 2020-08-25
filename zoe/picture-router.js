@@ -112,6 +112,7 @@ router.delete('/:id',
 
     Picture.removePicture(id)
     .then(pic => {
+      res.setHeader("Access-Control-Allow-Origin", 'http://localhost:3000');
       res.json(pic);
     })
     .catch(err => {
