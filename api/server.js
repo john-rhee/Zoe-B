@@ -29,16 +29,16 @@ server.use(express.json());
 // });
 
 server.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader(
+    res.Header("Access-Control-Allow-Origin", "*");
+    res.Header(
       "Access-Control-Allow-Headers",
       'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json'
     );
-    res.setHeader(
+    res.Header(
       "Access-Control-Allow-Methods",
       'GET, POST, OPTIONS, PUT, PATCH, DELETE'
     );
-    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.Header('Access-Control-Allow-Credentials', true);
     next();
   });
 
