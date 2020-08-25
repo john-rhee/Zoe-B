@@ -111,28 +111,18 @@ router.delete('/:id',
 
     //getting file name from req
     const file_name=req.query.file_name
-
-    .then(del => {
-      res.json(del);
-
-      Picture.removePicture(id)
-        .then(deleted => {
-            if (deleted) {
-            res.json({ removed: deleted });
-            } else {
-            res.status(404).json({ message: 'Could not find image with given id' });
-            }
-        })
-        .catch(err => {
-            res.status(500).json({ message: 'Failed to delete image' });
-        });
-
+    
+    Picture.removePicture(id)
+    .then(deleted => {
+        if (deleted) {
+        res.json({ removed: deleted });
+        } else {
+        res.status(404).json({ message: 'Could not find image with given id' });
+        }
     })
     .catch(err => {
-      res.status(500).json({ message: 'Failed to delete the images' });
+        res.status(500).json({ message: 'Failed to delete image' });
     });
-    
-    
 
     console.log("deleting", file_name)
     //deleting image from folder
@@ -140,6 +130,7 @@ router.delete('/:id',
     fs.unlink(`../Zoe-Redux-Backend/uploads/${file_name}`, (err) => {
         if (err) throw err;
       });
+      
 });
 
 router.put('/:id', 
