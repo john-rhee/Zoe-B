@@ -4,6 +4,8 @@ const restricted = require("../restricted-middleware.js");
 const Picture = require('./picture-model.js');
 const fs = require('fs');
 
+
+
 const multer = require('multer');
 const path = require('path');
 
@@ -78,7 +80,6 @@ upload.single("uimage"), (req, res) => {
 
     Picture.findPicture(userId)
         .then(pic => {
-            res.setHeader("Test", 'Test');
             res.json(pic);
          })
         .catch(err => {
@@ -112,31 +113,23 @@ router.delete('/:id',
     const file_name=req.query.file_name
 
     Picture.removePicture(id)
-    .then(pic => {
-      res.setHeader("Access-Control-Allow-Origin", 'http://localhost:3000');
-      res.json(pic);
+    .then(deleted => {
+        if (deleted) {
+        res.json({ removed: deleted });
+        } else {
+        res.status(404).json({ message: 'Could not find image with given id' });
+        }
     })
     .catch(err => {
-      res.status(500).json({ message: 'Failed to delete the image' });
-     });
-
-    // .then(deleted => {
-    //     if (deleted) {
-    //     res.json({ removed: deleted });
-    //     } else {
-    //     res.status(404).json({ message: 'Could not find image with given id' });
-    //     }
-    // })
-    // .catch(err => {
-    //     res.status(500).json({ message: 'Failed to delete image' });
-    // });
+        res.status(500).json({ message: 'Failed to delete image' });
+    });
 
     console.log("deleting", file_name)
     //deleting image from folder
     // fs.unlink(`/Users/John/Desktop/Git/Zoe-Redux-Backend/uploads/${file_name}`, (err) => {
-    fs.unlink(`../Zoe-Redux-Backend/uploads/${file_name}`, (err) => {
-        if (err) throw err;
-      });
+    // fs.unlink(`../Zoe-Redux-Backend/uploads/${file_name}`, (err) => {
+    //     if (err) throw err;
+    //   });
 });
 
 router.put('/:id', 
