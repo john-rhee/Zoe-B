@@ -96,12 +96,12 @@ upload.single("uimage"), (req, res) => {
     userId=req.query.user_id
 
     Picture.findPicture(userId)
-  .then(pic => {
-    res.json(pic);
-  })
-  .catch(err => {
-    res.status(500).json({ message: 'Failed to get the images' });
-  });
+      .then(pic => {
+        res.json(pic);
+      })
+      .catch(err => {
+        res.status(500).json({ message: 'Failed to get the images' });
+      });
 }); 
 
 router.delete('/:id', 
@@ -112,6 +112,13 @@ router.delete('/:id',
     //getting file name from req
     const file_name=req.query.file_name
 
+    .then(del => {
+      res.json(del);
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'Failed to delete the images' });
+    });
+    
     Picture.removePicture(id)
     .then(deleted => {
         if (deleted) {
