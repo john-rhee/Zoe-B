@@ -139,7 +139,7 @@ router.put('/:id',
 upload.single("uimage"),
 (req, res) => {
 
-    
+    res.status(200).json({})
 
     const imageName = req.file.filename
 
