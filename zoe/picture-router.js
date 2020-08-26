@@ -120,6 +120,7 @@ router.delete('/:id',
     Picture.removePicture(id)
     .then(deleted => {
         if (deleted) {
+        res.writeHead(200, {"Access-Control-Allow-Origin": 'http://localhost:3000'});
         res.json({ removed: deleted });
         
         } else {
