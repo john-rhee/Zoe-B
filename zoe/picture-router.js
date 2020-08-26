@@ -112,9 +112,9 @@ router.delete('/:id',
     console.log("deleting", file_name)
     //deleting image from folder
     // fs.unlink(`/Users/John/Desktop/Git/Zoe-Redux-Backend/uploads/${file_name}`, (err) => {
-    // fs.unlink(`../Zoe-B/uploads/${file_name}`, (err) => {
-    //     if (err) throw err;
-    //   });
+    fs.unlink(`../app/uploads/${file_name}`, (err) => {
+        if (err) throw err;
+      });
       
 });
 
@@ -140,9 +140,9 @@ upload.single("uimage"),
 
     //deleting previous image from folder
     // fs.unlink(`/Users/John/Desktop/Git/Zoe-Redux-Backend/uploads/${previousFile}`, (err) => {
-    // fs.unlink(`../Zoe-B/uploads/${previousFile}`, (err) => { 
-    //   if (err) throw err;
-    // }); 
+    fs.unlink(`../app/uploads/${previousFile}`, (err) => { 
+      if (err) throw err;
+    }); 
   
     Picture.findByImageId(imageId, userId)
     .then(pic => {
