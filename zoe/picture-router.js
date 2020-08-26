@@ -120,8 +120,10 @@ router.delete('/:id',
     Picture.removePicture(id)
     .then(deleted => {
         if (deleted) {
-        res.writeHead(200, {"Access-Control-Allow-Origin": 'http://localhost:3000'});
-        res.json({ removed: deleted });
+
+        response.writeHead(200, {"Access-Control-Allow-Origin": '*'});
+        response.write(JSON.stringify(deleted));
+        response.end();
         
         } else {
         res.status(404).json({ message: 'Could not find image with given id' });
