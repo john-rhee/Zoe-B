@@ -40,14 +40,6 @@ function checkFileType(file, cb){
 
 }
 
-//routing for uploaded picture files
-// router.post("/", upload.single("uimage"), function(req, res){
-//     console.log(req.file);
-//     res.json({
-//                     url: `https://zoe-backend.herokuapp.com/profile/${req.file.filename}`,
-//                     picture: req.file
-//                 });
-// })
 
 router.post('/', 
 // restricted, 
@@ -67,16 +59,6 @@ upload.single("uimage"), (req, res) => {
     console.log(imageName, imageTitle, imageDescript, userId);
     
     Picture.addPicture(imageName, imageTitle, imageDescript, userId)
-    // .then(pic => {
-    //   res.status(201).json(pic);
-    //   res.json({
-    //     url: `https://zoe-backend.herokuapp.com/profile/${req.file.filename}`,
-    // });
-      
-    // })
-    // .catch (err => {
-    //   res.status(500).json({ message: 'Failed to add picture' });
-    // });
 
     Picture.findPicture(userId)
         .then(pic => {
@@ -108,11 +90,6 @@ router.delete('/:id',
 // restricted, 
 (req, res) => {
     const { id } = req.params;
-
-    // response.writeHead(404, {"Content-Type": "application/json"});
-    // response.write(JSON.stringify(updatedPic));
-    // response.end();
-
 
     //getting file name from req
     const file_name=req.query.file_name
