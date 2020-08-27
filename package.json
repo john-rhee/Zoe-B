@@ -1,5 +1,5 @@
 {
-  "name": "Zoe-Redux-Backend",
+  "name": "Zoe-B",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/john-rhee/Zoe-Redux-Backend.git"
+    "url": "git+https://github.com/john-rhee/Zoe-B.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/john-rhee/Zoe-Redux-Backend/issues"
+    "url": "https://github.com/john-rhee/Zoe-B/issues"
   },
-  "homepage": "https://github.com/john-rhee/Zoe-Redux-Backend#readme",
+  "homepage": "https://github.com/john-rhee/Zoe-B#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",

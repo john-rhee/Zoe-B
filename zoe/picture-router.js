@@ -42,7 +42,7 @@ function checkFileType(file, cb){
 
 
 router.post('/', 
-restricted, 
+// restricted, 
 upload.single("uimage"), (req, res) => {
     upFiles= JSON.parse(decodeURI(req.file.originalname))
     console.log("this is file uploaded", upFiles);
@@ -70,7 +70,7 @@ upload.single("uimage"), (req, res) => {
   });  
 
   router.get('/', 
-  restricted, 
+  // restricted, 
   (req, res) => {
     console.log(req.query.user_id)
 
@@ -87,7 +87,7 @@ upload.single("uimage"), (req, res) => {
 }); 
 
 router.delete('/:id', 
-restricted, 
+// restricted, 
 (req, res) => {
     const { id } = req.params;
 
@@ -119,7 +119,7 @@ restricted,
 });
 
 router.put('/:id', 
-restricted, 
+// restricted, 
 upload.single("uimage"),
 (req, res) => {
 
@@ -161,6 +161,6 @@ upload.single("uimage"),
       res.status(500).json({ message: 'Failed to update the image' });
       
     });
-  });
+  }); 
 
 module.exports = router;
