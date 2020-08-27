@@ -42,7 +42,7 @@ function checkFileType(file, cb){
 
 
 router.post('/', 
-// restricted, 
+restricted, 
 upload.single("uimage"), (req, res) => {
     upFiles= JSON.parse(decodeURI(req.file.originalname))
     console.log("this is file uploaded", upFiles);
@@ -70,7 +70,7 @@ upload.single("uimage"), (req, res) => {
   });  
 
   router.get('/', 
-  // restricted, 
+  restricted, 
   (req, res) => {
     console.log(req.query.user_id)
 
@@ -87,7 +87,7 @@ upload.single("uimage"), (req, res) => {
 }); 
 
 router.delete('/:id', 
-// restricted, 
+restricted, 
 (req, res) => {
     const { id } = req.params;
 
@@ -112,14 +112,17 @@ router.delete('/:id',
     console.log("deleting", file_name)
     //deleting image from folder
     // fs.unlink(`/Users/John/Desktop/Git/Zoe-Redux-Backend/uploads/${file_name}`, (err) => {
-    fs.unlink(`../app/uploads/${file_name}`, (err) => {
-        if (err) throw err;
+    fs.unlink(`../appt/uploads/${file_name}`, (err) => {
+        if(err){
+          console.log(err)
+          return res.send(500, err);
+        }
       });
       
 });
 
 router.put('/:id', 
-// restricted, 
+restricted, 
 upload.single("uimage"),
 (req, res) => {
 
@@ -140,8 +143,11 @@ upload.single("uimage"),
 
     //deleting previous image from folder
     // fs.unlink(`/Users/John/Desktop/Git/Zoe-Redux-Backend/uploads/${previousFile}`, (err) => {
-    fs.unlink(`../app/uploads/${previousFile}`, (err) => { 
-      if (err) throw err;
+    fs.unlink(`../appt/uploads/${previousFile}`, (err) => { 
+      if(err){
+        console.log(err)
+        return res.send(500, err);
+      }
     }); 
   
     Picture.findByImageId(imageId, userId)
