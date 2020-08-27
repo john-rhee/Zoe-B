@@ -112,7 +112,7 @@ restricted,
     console.log("deleting", file_name)
     //deleting image from folder
     // fs.unlink(`/Users/John/Desktop/Git/Zoe-Redux-Backend/uploads/${file_name}`, (err) => {
-    fs.unlink(`../appt/uploads/${file_name}`, (err) => {
+    fs.unlink(`../app/uploads/${file_name}`, (err) => {
         if(err){
           console.log(err)
           return res.send(500, err);
@@ -143,7 +143,7 @@ upload.single("uimage"),
 
     //deleting previous image from folder
     // fs.unlink(`/Users/John/Desktop/Git/Zoe-Redux-Backend/uploads/${previousFile}`, (err) => {
-    fs.unlink(`../appt/uploads/${previousFile}`, (err) => { 
+    fs.unlink(`../app/uploads/${previousFile}`, (err) => { 
       if(err){
         console.log(err)
         return res.send(500, err);
